@@ -28,7 +28,7 @@ class UpdateChartOfAccountRequest extends FormRequest
             "account_no" => "required|unique:chart_of_accounts,account_no,".$this->id.",id",
             "account_name" => "required|unique:chart_of_accounts,account_name, ".$this->id.",id",
             "coa_type_id" => "required",
-            "normal_balance" => ["required", Rule::in(['Debit', 'Credit'])],
+            "normal_balance" => ["required", Rule::in(['Debit', 'Credit', 'debit', 'credit', 'CREDIT', 'DEBIT'])],
             "current_balance" => "",
             "parent_account" => ""
         ];

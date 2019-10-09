@@ -48,4 +48,13 @@ Route::group([
     Route::delete('chart-of-accounts/{id}', 'ChartOfAccountsController@softDelete');
     Route::get('chart-of-accounts/all/soft-deleted', 'ChartOfAccountsController@allSoftDeleted');
 
+     // chart of accounts transactions
+     Route::get('coa-transactions/{id}', 'CoaTransactionController@edit');
+     Route::get('coa-transactions', 'CoaTransactionController@all');
+     Route::post('coa-transactions', 'CoaTransactionController@store');
+     Route::patch('coa-transactions/{id}', 'CoaTransactionController@update');
+     Route::patch('coa-transactions/{id}/restore', 'CoaTransactionController@restoreDeleted');
+     Route::delete('coa-transactions/{id}', 'CoaTransactionController@softDelete');
+     Route::get('coa-transactions/all/soft-deleted', 'CoaTransactionController@allSoftDeleted');
+
 });
