@@ -19,8 +19,8 @@ class CreateChartOfAccountsTable extends Migration
             $table->integer("account_no")->unique();
             $table->string("account_name",60)->nullable();
             $table->string("normal_balance",10)->nullable();
-            $table->integer("parent_account")->unsigned();
-            $table->bigInteger("current_balance")->default(0);
+            $table->integer("parent_account")->nullable();
+            $table->bigInteger("current_balance")->nullable();
             $table->softDeletes();
             $table->timestamps();
 

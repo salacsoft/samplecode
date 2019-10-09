@@ -21,6 +21,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\coatypes\CoaTypeInterface::class,
             \App\Repositories\coatypes\CoaTypeRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\chartofaccounts\ChartOfAccountInterface::class,
+            \App\Repositories\chartofaccounts\ChartOfAccountRepository::class
+        );
     }
 
     /**
