@@ -13,4 +13,8 @@ class CoaType extends Model
         "code",
         "type"
     ];
+
+    public function chartOfAccount() {
+        return $this->hasMany(ChartOfAccount::class, "coa_type_id", "id");
+    }
 }

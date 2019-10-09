@@ -31,7 +31,6 @@ Route::group([
 ], function() {
 
     // Chart of account types
-
     Route::get('coa-types/{id}', 'CoaTypeController@edit');
     Route::get('coa-types', 'CoaTypeController@all');
     Route::post('coa-types', 'CoaTypeController@store');
@@ -39,5 +38,14 @@ Route::group([
     Route::patch('coa-types/{id}/restore', 'CoaTypeController@restoreDeleted');
     Route::delete('coa-types/{id}', 'CoaTypeController@softDelete');
     Route::get('coa-types/all/soft-deleted', 'CoaTypeController@allSoftDeleted');
+
+    // chart of accounts
+    Route::get('chart-of-accounts/{id}', 'ChartOfAccountsController@edit');
+    Route::get('chart-of-accounts', 'ChartOfAccountsController@all');
+    Route::post('chart-of-accounts', 'ChartOfAccountsController@store');
+    Route::patch('chart-of-accounts/{id}', 'ChartOfAccountsController@update');
+    Route::patch('chart-of-accounts/{id}/restore', 'ChartOfAccountsController@restoreDeleted');
+    Route::delete('chart-of-accounts/{id}', 'ChartOfAccountsController@softDelete');
+    Route::get('chart-of-accounts/all/soft-deleted', 'ChartOfAccountsController@allSoftDeleted');
 
 });
