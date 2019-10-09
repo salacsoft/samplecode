@@ -9,13 +9,12 @@ use App\Repositories\chartofaccounts\ChartOfAccountInterface;
 
 class ChartOfAccountsController extends Controller
 {
-    //
      // services
      protected $_chartofAccount;
 
      /** initialize the interface
-      * call the init function in CoaTypeInterface to set the Model associated with it.
-      * @param CoaTypeInterface
+      * call the init function in ChartOfAccountInterface to set the Model associated with it.
+      * @param ChartOfAccountInterface
       * @return resource
       */
      public function __construct(ChartOfAccountInterface $chartofAccount) {
@@ -37,7 +36,7 @@ class ChartOfAccountsController extends Controller
       * @param StoreCoaTypeRequest
       * @return mixed
       */
-     public function store(UpdateChartOfAccountRequest $request) {
+     public function store(StoreChartOfAccountRequest $request) {
          $response = $this->_chartofAccount->create($request);
          return $response;
      }

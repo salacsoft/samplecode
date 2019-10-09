@@ -6,6 +6,7 @@ use App\Models\ChartOfAccount;
 
 class  ChartOfAccountRepository extends BaseRepository implements ChartOfAccountInterface {
 
+    //Set model
     public function init() {
         $this->model = new ChartOfAccount;
     }

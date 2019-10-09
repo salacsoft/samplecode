@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreChartOfAccountRequest extends FormRequest
+class StoreCoaTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,12 @@ class StoreChartOfAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            "account_no" => "required|unique:chart_of_accounts",
-            "account_name" => "required|unique:chart_of_accounts",
-            "coa_type_id" => "required",
-            "normal_balance" => ["required", Rule::in(['Debit', 'Credit', 'debit', 'credit', 'CREDIT', 'DEBIT'])],
-            "current_balance" => "",
-            "parent_account" => ""
+            "chart_of_account_id" => "required|exists:chart_of_accounts,id",
+            "coa_trans_no" => "required|numeric|unique:coa_transactions",
+            "description" => "",
+            "posting_type" => ["required", Rule::in(['Debit', 'Credit', 'debit', 'credit', 'CREDIT', 'DEBIT'])],
+            "amount" => "required|numeric|min:0",
+            "posting_date" => "required|date_format:Y-m-d"
         ];
     }
 }
