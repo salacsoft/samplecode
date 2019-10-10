@@ -29,6 +29,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\coatransactions\CoaTransactionInterface::class,
             \App\Repositories\coatransactions\CoaTransactionRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\itemcategories\ItemCategoryInterface::class,
+            \App\Repositories\itemcategories\ItemCategoryRepository::class
+        );
     }
 
     /**
