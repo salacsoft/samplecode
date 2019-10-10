@@ -11,7 +11,7 @@ class CoaTypeController extends Controller
 {
 
     // services
-    protected $_coatype;
+    protected $_interface;
 
     /** initialize the interface
      * call the init function in CoaTypeInterface to set the Model associated with it.
@@ -19,15 +19,15 @@ class CoaTypeController extends Controller
      * @return resource
      */
     public function __construct(CoaTypeInterface $coatype) {
-        $this->_coatype = $coatype ;
-        $this->_coatype->init();
+        $this->_interface = $coatype ;
+        $this->_interface->init();
     }
 
     /** Get all the records from the table except from soft deleted
      * @return mixed
      */
     public function all() {
-        $response = $this->_coatype->all();
+        $response = $this->_interface->all();
         return $response;
     }
 
@@ -37,7 +37,7 @@ class CoaTypeController extends Controller
      * @return mixed
      */
     public function store(StoreCoaTypeRequest $request) {
-        $response = $this->_coatype->create($request);
+        $response = $this->_interface->create($request);
         return $response;
     }
 
@@ -47,7 +47,7 @@ class CoaTypeController extends Controller
      * @return [array] $response
      */
     public function edit($id) {
-        $response = $this->_coatype->find($id);
+        $response = $this->_interface->find($id);
         return $response;
     }
 
@@ -58,9 +58,9 @@ class CoaTypeController extends Controller
      */
     public function update(UpdateCoaTypeRequest $request, $id) {
         $response = [];
-        $updated = (boolean) $this->_coatype->update($request, $id);
+        $updated = (boolean) $this->_interface->update($request, $id);
         if ($updated) {
-            $response = $this->_coatype->find($id);
+            $response = $this->_interface->find($id);
         }
         return $response;
     }
@@ -71,7 +71,7 @@ class CoaTypeController extends Controller
      * @return no content
      */
     public function softDelete($id) {
-        return $this->_coatype->destroy($id);
+        return $this->_interface->destroy($id);
     }
 
 
@@ -79,7 +79,7 @@ class CoaTypeController extends Controller
      * @return mixed
      */
     public function allSoftDeleted(){
-        return $this->_coatype->trash();
+        return $this->_interface->trash();
     }
 
 
@@ -88,7 +88,7 @@ class CoaTypeController extends Controller
      * @return array
      */
     public function restoreDeleted($id) {
-        return $this->_coatype->restore($id);
+        return $this->_interface->restore($id);
     }
 
 

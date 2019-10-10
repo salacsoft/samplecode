@@ -10,7 +10,7 @@ use App\Repositories\coatransactions\CoaTransactionInterface;
 class CoaTransactionController extends Controller
 {
     // services
-    protected $_coatransaction;
+    protected $_interface;
 
     /** initialize the interface
      * call the init function in CoaTransactionInterface to set the Model associated with it.
@@ -18,8 +18,8 @@ class CoaTransactionController extends Controller
      * @return resource
      */
     public function __construct(CoaTransactionInterface $coatransaction) {
-        $this->_coatransaction = $coatransaction ;
-        $this->_coatransaction->init();
+        $this->_interface = $coatransaction ;
+        $this->_interface->init();
     }
 
 
@@ -27,17 +27,17 @@ class CoaTransactionController extends Controller
      * @return mixed
      */
     public function all() {
-        $response = $this->_coatransaction->all();
+        $response = $this->_interface->all();
         return $response;
     }
 
 
     /** Validate before storing the record on the table
-     * @param StoreCoaTypeRequest
+     * @param StoreCoaTransactionRequest
      * @return mixed
      */
     public function store(StoreCoaTransactionRequest $request) {
-        $response = $this->_coatransaction->create($request);
+        $response = $this->_interface->create($request);
         return $response;
     }
 
@@ -47,20 +47,20 @@ class CoaTransactionController extends Controller
      * @return [array] $response
      */
     public function edit($id) {
-        $response = $this->_coatransaction->find($id);
+        $response = $this->_interface->find($id);
         return $response;
     }
 
 
     /** Validate before it will update the record on the table
-     * @param UpdateCoaTypeRequest
+     * @param UpdateCoaTransactionRequest
      * @return mixed
      */
     public function update(UpdateCoaTransactionRequest $request, $id) {
         $response = [];
-        $updated = (boolean) $this->_coatransaction->update($request, $id);
+        $updated = (boolean) $this->_interface->update($request, $id);
         if ($updated) {
-            $response = $this->_coatransaction->find($id);
+            $response = $this->_interface->find($id);
         }
         return $response;
     }
@@ -71,7 +71,7 @@ class CoaTransactionController extends Controller
      * @return no content
      */
     public function softDelete($id) {
-        return $this->_coatransaction->destroy($id);
+        return $this->_interface->destroy($id);
     }
 
 
@@ -79,7 +79,7 @@ class CoaTransactionController extends Controller
      * @return mixed
      */
     public function allSoftDeleted(){
-        return $this->_coatransaction->trash();
+        return $this->_interface->trash();
     }
 
 
@@ -88,6 +88,6 @@ class CoaTransactionController extends Controller
      * @return array
      */
     public function restoreDeleted($id) {
-        return $this->_coatransaction->restore($id);
+        return $this->_interface->restore($id);
     }
 }

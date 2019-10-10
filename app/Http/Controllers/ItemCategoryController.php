@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreChartOfAccountRequest;
-use App\Http\Requests\UpdateChartOfAccountRequest;
-use App\Repositories\chartofaccounts\ChartOfAccountInterface;
+use App\Http\Requests\StoreItemCategoryRequest;
+use App\Http\Requests\UpdateItemCategoryRequest;
+use App\Repositories\itemcategories\ItemCategoryInterface;
 
-class ChartOfAccountsController extends Controller
+class ItemCategoryController extends Controller
 {
      // services
      protected $_interface;
 
      /** initialize the interface
-      * call the init function in ChartOfAccountInterface to set the Model associated with it.
-      * @param ChartOfAccountInterface
+      * call the init function in CoaTypeInterface to set the Model associated with it.
+      * @param Interface
       * @return resource
       */
-     public function __construct(ChartOfAccountInterface $chartofAccount) {
-         $this->_interface = $chartofAccount ;
+     public function __construct(ItemCategoryInterface $interface) {
+         $this->_interface = $interface ;
          $this->_interface->init();
      }
-
 
      /** Get all the records from the table except from soft deleted
       * @return mixed
@@ -33,10 +32,10 @@ class ChartOfAccountsController extends Controller
 
 
      /** Validate before storing the record on the table
-      * @param StoreChartOfAccountRequest
+      * @param StoreItemCategoryRequest
       * @return mixed
       */
-     public function store(StoreChartOfAccountRequest $request) {
+     public function store(StoreItemCategoryRequest $request) {
          $response = $this->_interface->create($request);
          return $response;
      }
@@ -53,10 +52,10 @@ class ChartOfAccountsController extends Controller
 
 
      /** Validate before it will update the record on the table
-      * @param UpdateChartOfAccountRequest
+      * @param UpdateItemCategoryRequest
       * @return mixed
       */
-     public function update(UpdateChartOfAccountRequest $request, $id) {
+     public function update(UpdateItemCategoryRequest $request, $id) {
          $response = [];
          $updated = (boolean) $this->_interface->update($request, $id);
          if ($updated) {
