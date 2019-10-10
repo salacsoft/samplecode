@@ -21,6 +21,7 @@ class CreateCoabookClosingsTable extends Migration
             $table->date("posting_date")->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer("closing_month");
             $table->integer("closing_year");
+            $table->bigInteger("user_id")->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -28,6 +29,11 @@ class CreateCoabookClosingsTable extends Migration
                     ->references("id")->on("chart_of_accounts")
                     ->onUpdate("cascade")
                     ->onDelete("cascade");
+
+            $table->foreign("user_id")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
         });
     }
 
@@ -38,6 +44,8 @@ class CreateCoabookClosingsTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('coabook_closings');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

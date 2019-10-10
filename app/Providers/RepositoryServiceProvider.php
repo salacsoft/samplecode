@@ -33,6 +33,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\itemcategories\ItemCategoryInterface::class,
             \App\Repositories\itemcategories\ItemCategoryRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\inventories\InventoryInterface::class,
+            \App\Repositories\inventories\InventoryRepository::class
+        );
     }
 
     /**
