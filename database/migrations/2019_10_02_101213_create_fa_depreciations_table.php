@@ -23,12 +23,18 @@ class CreateFaDepreciationsTable extends Migration
             $table->integer("depreciated_life")->default(0);
             $table->float("market_value")->default(0);
             $table->date("posting_date")->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->bigInteger("user_id")->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 
 
             $table->foreign("inventory_id")
                     ->references("id")->on("inventories")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
+            $table->foreign("user_id")
+                    ->references("id")->on("users")
                     ->onDelete("cascade")
                     ->onUpdate("cascade");
         });
@@ -41,6 +47,8 @@ class CreateFaDepreciationsTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('fa_depreciations');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

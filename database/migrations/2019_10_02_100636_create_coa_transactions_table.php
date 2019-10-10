@@ -21,11 +21,17 @@ class CreateCoaTransactionsTable extends Migration
             $table->string("posting_type",10);
             $table->bigInteger("amount");
             $table->date("posting_date")->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->bigInteger("user_id")->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 
             $table->foreign("chart_of_account_id")
                     ->references("id")->on("chart_of_accounts")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
+            $table->foreign("user_id")
+                    ->references("id")->on("users")
                     ->onDelete("cascade")
                     ->onUpdate("cascade");
         });
@@ -38,6 +44,8 @@ class CreateCoaTransactionsTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('coa_transactions');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

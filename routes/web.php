@@ -57,7 +57,7 @@ Route::group([
     Route::delete('coa-transactions/{id}', 'CoaTransactionController@softDelete');
     Route::get('coa-transactions/all/soft-deleted', 'CoaTransactionController@allSoftDeleted');
 
-    // chart of accounts transactions
+    // item category
     Route::get('item-categories/{id}', 'ItemCategoryController@edit');
     Route::get('item-categories', 'ItemCategoryController@all');
     Route::post('item-categories', 'ItemCategoryController@store');
@@ -65,5 +65,15 @@ Route::group([
     Route::patch('item-categories/{id}/restore', 'ItemCategoryController@restoreDeleted');
     Route::delete('item-categories/{id}', 'ItemCategoryController@softDelete');
     Route::get('item-categories/all/soft-deleted', 'ItemCategoryController@allSoftDeleted');
+
+
+    // inventories
+    Route::get('inventories/{id}', 'InventoryController@edit');
+    Route::get('inventories', 'InventoryController@all');
+    Route::post('inventories', 'InventoryController@store');
+    Route::patch('inventories/{id}', 'InventoryController@update');
+    Route::patch('inventories/{id}/restore', 'InventoryController@restoreDeleted');
+    Route::delete('inventories/{id}', 'InventoryController@softDelete');
+    Route::get('inventories/all/soft-deleted', 'InventoryController@allSoftDeleted');
 
 });
