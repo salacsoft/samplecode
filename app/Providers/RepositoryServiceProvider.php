@@ -37,6 +37,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\inventories\InventoryInterface::class,
             \App\Repositories\inventories\InventoryRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\fixedassets\FixedAssetInterface::class,
+            \App\Repositories\fixedassets\FixedAssetRepository::class
+        );
     }
 
     /**

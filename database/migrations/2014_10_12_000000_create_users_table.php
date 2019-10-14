@@ -21,10 +21,25 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->bigInteger("created_by")->unsigned()->nullable();
+            $table->bigInteger("updated_by")->unsigned()->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign("created_by")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
+            $table->foreign("updated_by")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
         });
+
+
     }
 
     /**
@@ -34,6 +49,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('users');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

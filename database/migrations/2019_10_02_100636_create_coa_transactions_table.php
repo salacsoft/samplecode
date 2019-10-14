@@ -21,7 +21,8 @@ class CreateCoaTransactionsTable extends Migration
             $table->string("posting_type",10);
             $table->bigInteger("amount");
             $table->date("posting_date")->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->bigInteger("user_id")->unsigned()->nullable();
+            $table->bigInteger("created_by")->unsigned()->nullable();
+            $table->bigInteger("updated_by")->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 
@@ -30,7 +31,12 @@ class CreateCoaTransactionsTable extends Migration
                     ->onDelete("cascade")
                     ->onUpdate("cascade");
 
-            $table->foreign("user_id")
+            $table->foreign("created_by")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
+            $table->foreign("updated_by")
                     ->references("id")->on("users")
                     ->onDelete("cascade")
                     ->onUpdate("cascade");

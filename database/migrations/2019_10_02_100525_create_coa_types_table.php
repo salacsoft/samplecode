@@ -17,8 +17,21 @@ class CreateCoaTypesTable extends Migration
             $table->bigIncrements('id');
             $table->string("code",10)->unique();
             $table->string("type",60)->unique();
+            $table->bigInteger("created_by")->unsigned()->nullable();
+            $table->bigInteger("updated_by")->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign("created_by")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
+            $table->foreign("updated_by")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
         });
     }
 
@@ -29,6 +42,8 @@ class CreateCoaTypesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('coa_types');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
