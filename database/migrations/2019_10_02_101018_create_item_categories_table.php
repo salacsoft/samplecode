@@ -16,6 +16,8 @@ class CreateItemCategoriesTable extends Migration
         Schema::create('item_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("category")->unique();
+            $table->bigInteger("created_by")->unsigned()->nullable();
+            $table->bigInteger("updated_by")->unsigned()->nullable();
             $table->SoftDeletes();
             $table->timestamps();
         });
@@ -28,6 +30,8 @@ class CreateItemCategoriesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('item_categories');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
     }
 }

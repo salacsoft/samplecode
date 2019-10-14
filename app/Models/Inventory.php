@@ -21,7 +21,11 @@ class Inventory extends Model
         "posting_date",
         "on_hand",
         "isfixed_asset",
-        "user_id"
+        "salvage_value",
+        "life_span",
+        "depreciation_value",
+        "created_by",
+        "updated_by"
     ];
 
     public function itemCategory(){

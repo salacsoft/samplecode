@@ -21,7 +21,8 @@ class CreateCoabookClosingsTable extends Migration
             $table->date("posting_date")->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer("closing_month");
             $table->integer("closing_year");
-            $table->bigInteger("user_id")->unsigned()->nullable();
+            $table->bigInteger("created_by")->unsigned()->nullable();
+            $table->bigInteger("updated_by")->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -30,7 +31,12 @@ class CreateCoabookClosingsTable extends Migration
                     ->onUpdate("cascade")
                     ->onDelete("cascade");
 
-            $table->foreign("user_id")
+            $table->foreign("created_by")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
+            $table->foreign("updated_by")
                     ->references("id")->on("users")
                     ->onDelete("cascade")
                     ->onUpdate("cascade");

@@ -19,7 +19,8 @@ class CreateInventoryTransactionsTable extends Migration
             $table->string("details",100)->nullable();
             $table->float("qty");
             $table->date("posting_date")->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->bigInteger("user_id")->unsigned()->nullable();
+            $table->bigInteger("created_by")->unsigned()->nullable();
+            $table->bigInteger("updated_by")->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 
@@ -28,7 +29,12 @@ class CreateInventoryTransactionsTable extends Migration
                     ->onDelete("cascade")
                     ->onUpdate("cascade");
 
-            $table->foreign("user_id")
+            $table->foreign("created_by")
+                    ->references("id")->on("users")
+                    ->onDelete("cascade")
+                    ->onUpdate("cascade");
+
+            $table->foreign("updated_by")
                     ->references("id")->on("users")
                     ->onDelete("cascade")
                     ->onUpdate("cascade");

@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreInventoryRequest extends FormRequest
+class UpdateFixedAssetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +27,13 @@ class StoreInventoryRequest extends FormRequest
         return [
             "item_category_id" => "required|exists:item_categories,id",
             "product_code" => "required",
-            "sku_code" => "required|unique:inventories,sku_code",
+            "sku_code" => "",
             "description" => "required",
             "sku_qty" => "required|numeric",
             "uom" => "",
             "cost"=> "required|numeric",
-            "posting_date" => "required",
             "on_hand" => "",
-            "isfixed_asset" => "",
+            "isfixed_asset" => ["required", Rule::in([true, 1])],
             "salvage_value" => "numeric",
             "life_span" => "required",
             "depreciation_value" => "required|numeric",

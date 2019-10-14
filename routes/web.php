@@ -66,14 +66,23 @@ Route::group([
     Route::delete('item-categories/{id}', 'ItemCategoryController@softDelete');
     Route::get('item-categories/all/soft-deleted', 'ItemCategoryController@allSoftDeleted');
 
+     // Fixed Assets
+    Route::get('fixed-assets/{id}', 'FixedAssetController@edit');
+    Route::get('fixed-assets', 'FixedAssetController@all');
+    Route::post('fixed-assets', 'FixedAssetController@store');
+    Route::patch('fixed-assets/{id}', 'FixedAssetController@update');
+    Route::patch('fixed-assets/{id}/restore', 'FixedAssetController@restoreDeleted');
+    Route::delete('fixed-assets/{id}', 'FixedAssetController@softDelete');
+    Route::get('fixed-assets/all/soft-deleted', 'FixedAssetController@allSoftDeleted');
 
-    // inventories
-    Route::get('inventories/{id}', 'InventoryController@edit');
-    Route::get('inventories', 'InventoryController@all');
-    Route::post('inventories', 'InventoryController@store');
-    Route::patch('inventories/{id}', 'InventoryController@update');
-    Route::patch('inventories/{id}/restore', 'InventoryController@restoreDeleted');
-    Route::delete('inventories/{id}', 'InventoryController@softDelete');
-    Route::get('inventories/all/soft-deleted', 'InventoryController@allSoftDeleted');
+    // fixed assets depreciations
+    // Route::get('inventories/{id}', 'InventoryController@edit');
+    // Route::get('inventories', 'InventoryController@all');
+    // Route::post('inventories', 'InventoryController@store');
+    // Route::patch('inventories/{id}', 'InventoryController@update');
+    // Route::patch('inventories/{id}/restore', 'InventoryController@restoreDeleted');
+    // Route::delete('inventories/{id}', 'InventoryController@softDelete');
+    // Route::get('inventories/all/soft-deleted', 'InventoryController@allSoftDeleted');
+
 
 });
